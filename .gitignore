@@ -39,3 +39,11 @@ luac.out
 *.x86_64
 *.hex
 
+# Spoons
+/Spoons
+
+# Mac meta data
+.DS_Store
+
+# .idea
+.idea
