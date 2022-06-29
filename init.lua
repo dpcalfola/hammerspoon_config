@@ -123,6 +123,23 @@ local function maximize_window()
     win:setFrame(frame)
 end
 
+
+-- function : Adjust 2/3 height size window
+local function two_thirds_height_size_window()
+    local win = hs.window.focusedWindow()
+    local frame = win:frame()
+    local max_size = win:screen():frame()
+
+    frame.x = max_size.x
+    frame.y = max_size.y + (max_size.h / 3)
+    frame.w = max_size.w
+    frame.h = max_size.h * 2 / 3
+
+    win:setFrame(frame)
+
+end
+
+
 -- Key bind window control
 hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'left', function()
     move_win_to_left()
@@ -143,4 +160,8 @@ end)
 hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'pageup', function()
     maximize_window()
     hs.alert.show("Maximize window", 0.4)
+end)
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'home', function()
+    two_thirds_height_size_window()
+    hs.alert.show("Two_third_sized window", 0.4)
 end)
