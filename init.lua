@@ -8,7 +8,7 @@ hs.hotkey.bind({ 'shift', 'cmd' }, 'H', HelloHammerspoon)
 
 
 
--- RELOAD HAMMERSPOON CONFIG : opt + cmd + R
+-- RELOAD HAMMERSPOON CONFIG : ctrl + opt + cmd + R
 hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'r', hs.reload)
 hs.alert.show("Config loaded")
 
