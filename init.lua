@@ -1,6 +1,6 @@
 -- Alert message (HelloWorld)
 function HelloHammerspoon()
-    hs.alert.show('Hello Mammerspoon!!')
+    hs.alert.show('Hello Hammerspoon!!')
 end
 
 hs.hotkey.bind({ 'shift', 'cmd' }, 'H', HelloHammerspoon)
@@ -20,6 +20,44 @@ hs.hotkey.bind({ 'shift' }, 'F1', hs.hints.windowHints)
 
 
 
+-- INPUT LANGUAGE SOURCE CHANGER
+
+-- Print input source on Hammerspoon Console
+hs.hotkey.bind({ 'cmd' }, 'I', function()
+    local input_source = hs.keycodes.currentSourceID()
+    print(input_source)
+end)
+-- RESULT
+-- Korean: com.apple.inputmethod.Korean.2SetKorean
+-- English: com.apple.keylayout.ABC
+
+
+
+-- input source changer
+do
+    local inputSource = {
+        english = "com.apple.keylayout.ABC",
+        korean = "com.apple.inputmethod.Korean.2SetKorean"
+    }
+
+    local changeInput = function()
+
+        local current = hs.keycodes.currentSourceID()
+        local nextInput = nil
+
+        if current == inputSource.english then
+            nextInput = inputSource.korean
+            hs.alert.show("한국어")
+        else
+            nextInput = inputSource.english
+            hs.alert.show("English")
+        end
+        hs.keycodes.currentSourceID(nextInput)
+
+    end
+
+    hs.hotkey.bind({'ctrl'},'space', changeInput)
+end
 
 
 -- RUN APPLICATIONS
@@ -123,7 +161,6 @@ local function maximize_window()
     win:setFrame(frame)
 end
 
-
 -- function : Adjust 2/3 height size window
 local function two_thirds_height_size_window()
     local win = hs.window.focusedWindow()
@@ -138,7 +175,6 @@ local function two_thirds_height_size_window()
     win:setFrame(frame)
 
 end
-
 
 -- Key bind window control
 hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'left', function()
