@@ -5,13 +5,31 @@ end
 
 hs.hotkey.bind({ 'shift', 'cmd' }, 'H', HelloHammerspoon)
 
-
-
-
 -- RELOAD HAMMERSPOON CONFIG : ctrl + opt + cmd + R
 hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'r', hs.reload)
 hs.alert.show("Config loaded")
 
+-- SYSTEM CONTROL START FROM HERE
+-- ctrl + opt + cmd + shift + {Key}
+
+-- About Hammerspoon console
+-- Open Hammerspoon console : ctrl + opt + cmd + shift + C
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd', 'shift' }, 'c', function()
+    hs.toggleConsole()
+    hs.alert.show("Hammerspoon console")
+end)
+-- Print message on console for tasting : ctrl + opt + cmd + shift + T
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd', 'shift' }, 't', function()
+    print("Test message")
+end)
+
+-- Lock screen and sleep : ctrl + opt + cmd + shift + L
+-- After 5 seconds of lockScreen, the system enters sleep mode
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd', 'shift' }, 'L', function()
+    hs.caffeinate.lockScreen()
+end)
+
+-- SYSTEM CONTROL ENDED
 
 
 
@@ -21,7 +39,6 @@ hs.hotkey.bind({ 'shift' }, 'F1', hs.hints.windowHints)
 
 
 -- INPUT LANGUAGE SOURCE CHANGER
-
 -- Print input source on Hammerspoon Console
 hs.hotkey.bind({ 'cmd' }, 'I', function()
     local input_source = hs.keycodes.currentSourceID()
@@ -31,17 +48,13 @@ end)
 -- Korean: com.apple.inputmethod.Korean.2SetKorean
 -- English: com.apple.keylayout.ABC
 
-
-
--- input source changer
+-- Input source changer
 do
     local inputSource = {
         english = "com.apple.keylayout.ABC",
         korean = "com.apple.inputmethod.Korean.2SetKorean"
     }
-
     local changeInput = function()
-
         local current = hs.keycodes.currentSourceID()
         local nextInput = nil
 
@@ -53,10 +66,8 @@ do
             hs.alert.show("English")
         end
         hs.keycodes.currentSourceID(nextInput)
-
     end
-
-    hs.hotkey.bind({'ctrl'},'space', changeInput)
+    hs.hotkey.bind({ 'ctrl' }, 'space', changeInput)
 end
 
 
@@ -67,8 +78,6 @@ hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'N', function()
     hs.application.launchOrFocus('Notes')
     hs.alert.show("Notes")
 end)
-
-
 -- 크롬 : ctrl + opt + cmd + C
 hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'C', function()
     hs.application.launchOrFocus('Google Chrome')
@@ -76,10 +85,7 @@ hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'C', function()
 end)
 
 
-
-
-
--- WINDOW CONTROL
+-- WINDOW CONTROL STARTS FROM HERE
 
 -- function : Move window to left
 local function move_win_to_left()
@@ -201,3 +207,5 @@ hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'home', function()
     two_thirds_height_size_window()
     hs.alert.show("Two_third_sized window", 0.4)
 end)
+
+-- WINDOW CONTROL ENDED
