@@ -39,15 +39,6 @@ hs.hotkey.bind({ 'shift' }, 'F1', hs.hints.windowHints)
 
 
 -- INPUT LANGUAGE SOURCE CHANGER
--- Print input source on Hammerspoon Console
-hs.hotkey.bind({ 'cmd' }, 'I', function()
-    local input_source = hs.keycodes.currentSourceID()
-    print(input_source)
-end)
--- RESULT
--- Korean: com.apple.inputmethod.Korean.2SetKorean
--- English: com.apple.keylayout.ABC
-
 -- Input source changer
 do
     local inputSource = {
