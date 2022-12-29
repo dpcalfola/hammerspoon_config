@@ -1,12 +1,5 @@
--- Alert message (HelloWorld)
-function HelloHammerspoon()
-    hs.alert.show('Hello Hammerspoon!!')
-end
-
-hs.hotkey.bind({ 'shift', 'cmd' }, 'H', HelloHammerspoon)
-
--- RELOAD HAMMERSPOON CONFIG : ctrl + opt + cmd + R
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'r', hs.reload)
+-- RELOAD HAMMERSPOON CONFIG : ctrl + opt + shift + R
+hs.hotkey.bind({ 'ctrl', 'option', 'shift' }, 'R', hs.reload)
 hs.alert.show("Config loaded")
 
 -- SYSTEM CONTROL START FROM HERE
@@ -33,8 +26,8 @@ end)
 
 
 
--- WINDOW HINTS : shift + F1
-hs.hotkey.bind({ 'shift' }, 'F1', hs.hints.windowHints)
+-- WINDOW HINTS : 'ctrl', 'option', 'cmd' + / (slash)
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, '/', hs.hints.windowHints)
 
 
 
@@ -196,7 +189,6 @@ local function two_thirds_height_size_window()
     frame.h = max_size.h * 2 / 3
 
     win:setFrame(frame)
-
 end
 
 -- Key bind window control
@@ -220,9 +212,85 @@ hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'pageup', function()
     maximize_window()
     hs.alert.show("Maximize window", 0.4)
 end)
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, '0', function()
+    maximize_window()
+    hs.alert.show("Maximize window", 0.4)
+end)
 hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'home', function()
     two_thirds_height_size_window()
     hs.alert.show("Two_third_sized window", 0.4)
 end)
+
+
+-- Adjust 1/4 height and width and move to each quadrant
+
+-- Move to left top: ctrl + option + cmd + O
+local function move_to_left_top()
+    local win = hs.window.focusedWindow()
+    local frame = win:frame()
+    local max_size = win:screen():frame()
+
+    frame.x = max_size.x
+    frame.y = max_size.y
+    frame.w = max_size.w / 2
+    frame.h = max_size.h / 2
+    win:setFrame(frame)
+end
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'O', function()
+    move_to_left_top()
+    hs.alert.show("Move to left top", 0.4)
+end)
+
+-- Move to right top: ctrl + option + cmd + P
+local function move_to_right_top()
+    local win = hs.window.focusedWindow()
+    local frame = win:frame()
+    local max_size = win:screen():frame()
+
+    frame.x = max_size.x + (max_size.w / 2)
+    frame.y = max_size.y
+    frame.w = max_size.w / 2
+    frame.h = max_size.h / 2
+    win:setFrame(frame)
+end
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'P', function()
+    move_to_right_top()
+    hs.alert.show("Move to right top", 0.4)
+end)
+
+-- Move to left bottom: ctrl + option + cmd + L
+local function move_to_left_bottom()
+    local win = hs.window.focusedWindow()
+    local frame = win:frame()
+    local max_size = win:screen():frame()
+
+    frame.x = max_size.x
+    frame.y = max_size.y + (max_size.h / 2)
+    frame.w = max_size.w / 2
+    frame.h = max_size.h / 2
+    win:setFrame(frame)
+end
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'L', function()
+    move_to_left_bottom()
+    hs.alert.show("Move to left bottom", 0.4)
+end)
+
+-- Move to right bottom: ctrl + option + cmd + ;
+local function move_to_right_bottom()
+    local win = hs.window.focusedWindow()
+    local frame = win:frame()
+    local max_size = win:screen():frame()
+
+    frame.x = max_size.x + (max_size.w / 2)
+    frame.y = max_size.y + (max_size.h / 2)
+    frame.w = max_size.w / 2
+    frame.h = max_size.h / 2
+    win:setFrame(frame)
+end
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, ';', function()
+    move_to_right_bottom()
+    hs.alert.show("Move to right bottom", 0.4)
+end)
+
 
 -- WINDOW CONTROL ENDED
