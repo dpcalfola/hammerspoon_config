@@ -48,12 +48,14 @@ end)
 -- Korean: com.apple.inputmethod.Korean.2SetKorean
 -- English: com.apple.keylayout.ABC
 
--- Input source changer
+-- INPUT SOURCE CHANGER
 do
     local inputSource = {
         english = "com.apple.keylayout.ABC",
         korean = "com.apple.inputmethod.Korean.2SetKorean"
     }
+
+    -- Toggle input source
     local changeInput = function()
         local current = hs.keycodes.currentSourceID()
         local nextInput = nil
@@ -68,7 +70,22 @@ do
         hs.keycodes.currentSourceID(nextInput)
     end
     hs.hotkey.bind({ 'ctrl' }, 'space', changeInput)
+
+    -- Select input source directly
+    -- Korean : ctrl + option + cmd + K
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'K', function()
+        hs.keycodes.currentSourceID(inputSource.korean)
+        hs.alert.show("한국어", 0.4)
+    end)
+    -- English : ctrl + option + cmd + J
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'J', function()
+        hs.keycodes.currentSourceID(inputSource.english)
+        hs.alert.show("English", 0.4)
+    end)
 end
+-- INPUT SOURCE CHANGER ENDED
+
+
 
 
 -- RUN APPLICATIONS
