@@ -1,29 +1,68 @@
 # hammerspoon_config
 
-## v0.1
+## v0.2
+last update: 2022-12-30
 
 >## Shortcut list
 >
+> <br>
+> 
 >#### Hammerspoon control
+> * ctrl + opt + shift + {key} 
+>   * Reload Hammerspoon config: ctrl + opt + shift + R 
+>   * Open Hammerspoon console: ctrl + opt + shift + C
+>   * Print message on console for tasting: ctrl + opt + shift + T
 >
-> * Reload Hammerspoon config : ctrl + opt + cmd + R
-> * Open Hammerspoon console : ctrl + opt + cmd + shift + C
-> * Print message on console for tasting : ctrl + opt + cmd + shift + T
+> <br>
 >
 >#### System control
+> * ctrl + opt + cmd + shift + {key}
+>   * Lock screen and Enter sleep mode: 
+>     * Lock screen: ctrl + opt + cmd + shift + L
+>     * Sleep mode: If there is no input for 5 seconds after the screen is locked, enter sleep mode
 >
-> * Lock screen and sleep : ctrl + opt + cmd + shift + L
->  * 화면 잠김 이후 5초간 입력이 없으면 sleep mode 로 진입
+> <br>
 >
 >#### Useful shortcuts
 >
-> * Window hint : shift + F1
-> * Input source changer : ctrl + space
->
+> * Window hint:
+>   * ctrl + opt + cmd + /(slash)
+> * Input source changer:
+>   * Change next input source: ctrl + space
+>   * Select Korean: ctrl + opt + cmd + K
+>   * Select English: ctrl + opt + cmd + J
+> 
+> <br>
+> 
 >#### Run applications
 >
-> * 메모장 : ctrl + opt + cmd + N
-> * 크롬 : ctrl + opt + cmd + C
+> * Note: ctrl + opt + cmd + N
+> * Google chrome: ctrl + opt + cmd + C
+>
+> 
+> <br>
+> 
+> #### Window Control
+>  
+> * Half screen control
+>   * Move to left half: ctrl + opt + cmd + left
+>   * Move to right half: ctrl + opt + cmd + right
+>   * Move to top half: ctrl + opt + cmd + up
+>   * Move to bottom half: ctrl + opt + cmd + down
+> 
+> * Quadrant screen control
+>   * Move to left top: ctrl + opt + cmd + O
+>   * Move to right top: ctrl + opt + cmd + P
+>   * Move to left bottom: ctrl + opt + cmd + L
+>   * Move to right bottom: ctrl + opt + cmd + ;
+> 
+> * etc
+>  * Move to Bottom 2/3 screen: ctrl + opt + cmd + home
+>  * Maximize window (both shortcuts work):
+>    * ctrl + opt + cmd + pageup
+>    * ctrl + opt + cmd + 0
+> 
+> <br>
 
 <hr/>
 
