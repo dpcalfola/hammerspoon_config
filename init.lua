@@ -1,20 +1,22 @@
--- RELOAD HAMMERSPOON CONFIG : ctrl + opt + shift + R
+-- ABOUT HAMMERSPOON
+-- ctrl + option + shift + {key}
+
+-- Reload Hammerspoon Config : ctrl + opt + shift + R
 hs.hotkey.bind({ 'ctrl', 'option', 'shift' }, 'R', hs.reload)
 hs.alert.show("Config loaded")
 
--- SYSTEM CONTROL START FROM HERE
--- ctrl + opt + cmd + shift + {Key}
-
--- About Hammerspoon console
--- Open Hammerspoon console : ctrl + opt + cmd + shift + C
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd', 'shift' }, 'c', function()
+-- Open Hammerspoon console : ctrl + opt + shift + C
+hs.hotkey.bind({ 'ctrl', 'option', 'shift' }, 'c', function()
     hs.toggleConsole()
     hs.alert.show("Hammerspoon console")
 end)
--- Print message on console for tasting : ctrl + opt + cmd + shift + T
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd', 'shift' }, 't', function()
+-- Print message on console for tasting : ctrl + opt + shift + T
+hs.hotkey.bind({ 'ctrl', 'option', 'shift' }, 't', function()
     print("Test message")
 end)
+
+
+
 
 -- Lock screen and sleep : ctrl + opt + cmd + shift + L
 -- After 5 seconds of lockScreen, the system enters sleep mode
@@ -22,7 +24,6 @@ hs.hotkey.bind({ 'ctrl', 'option', 'cmd', 'shift' }, 'L', function()
     hs.caffeinate.lockScreen()
 end)
 
--- SYSTEM CONTROL ENDED
 
 
 
