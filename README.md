@@ -57,10 +57,10 @@ last update: 2022-12-30
 >   * Move to right bottom: ctrl + opt + cmd + ;
 > 
 > * etc
->  * Move to Bottom 2/3 screen: ctrl + opt + cmd + home
->  * Maximize window (both shortcuts work):
->    * ctrl + opt + cmd + pageup
->    * ctrl + opt + cmd + 0
+>   * Move to Bottom 2/3 screen: ctrl + opt + cmd + home
+>   * Maximize window (both shortcuts work):
+>     * ctrl + opt + cmd + pageup
+>     * ctrl + opt + cmd + 0
 > 
 > <br>
 
