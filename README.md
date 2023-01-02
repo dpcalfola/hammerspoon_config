@@ -22,8 +22,6 @@
 
 ## < Shortcuts list >
 
-<br>
-
 ### Hammerspoon control
 
 * ctrl + opt + shift + {key}
@@ -53,14 +51,14 @@
 
 <br>
 
-#### Run applications
+### Run applications
 
 * Note: ctrl + opt + cmd + N
 * Google chrome: ctrl + opt + cmd + C
 
  <br>
 
-#### Window Control
+### Window Control
 
 * Half screen control
   * Move to left half: ctrl + opt + cmd + left
@@ -88,9 +86,9 @@
 <br>
 <br>
 
-## 사용 방법:
+## < 사용 방법 >
 
-### < Hammerspoon 설치 >
+### Hammerspoon 설치
 
 1. 설치
    - Homebrew 에서 쉽게 설치 가능합니다
@@ -107,7 +105,7 @@
    5. 버튼을 누르고 나타난 Finder 창에서 우상단 Search 입력창에 Hammerspoon 앱을 찾아 열기
    6. 접근 권한이 설정 되었는지 확인 (토글이 우측에 있는지 확인)
 
-### < config 적용하기 >
+### config 적용하기
 
 * 방법1: 설정파일 교체
   1. 레파지토리의 init.lua 파일을 다운로드 합니다
