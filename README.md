@@ -11,10 +11,10 @@
 <hr>
 <br>
 
-## < Version: v0.2 >
+## < Version: v0.201 >
 
 + last update
-    - Code: 2022-12-30
+    - Code: 2023-01-04
     - Manual(README): 2023-01-02
 
 <br>
@@ -77,6 +77,10 @@
   * Maximize window (both shortcuts work):
     * ctrl + opt + cmd + pageup
     * ctrl + opt + cmd + 0
+
+* Move the focused window between monitors
+  * Move to left monitor: ctrl + opt + cmd + [
+  * Move to right monitor: ctrl + opt + cmd + ]
 
 <br>
 
