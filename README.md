@@ -35,8 +35,8 @@
 
 * ctrl + opt + cmd + shift + {key}
   * Lock screen and Enter sleep mode:
-  * Lock screen: ctrl + opt + cmd + shift + L
-    * Sleep mode: If there is no input for 5 seconds after the screen is locked, enter sleep mode
+    * Lock screen: ctrl + opt + cmd + shift + L
+      * Sleep mode: If there is no input for 5 seconds after the screen is locked, enter sleep mode
 
 <br>
 

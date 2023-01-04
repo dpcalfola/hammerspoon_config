@@ -286,4 +286,31 @@ hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, ';', function()
 end)
 
 
+
+-- Move window between monitors
+
+-- Function: Window move to left or right monitor
+local function move_window_to_left_or_right_monitor(direction)
+    local win = hs.window.focusedWindow()
+    local screen = win:screen()
+    local next_screen = screen:toEast()
+    if direction == 'left' then
+        next_screen = screen:toWest()
+    end
+    win:moveToScreen(next_screen)
+end
+
+-- Move window to left monitor: ctrl + option + cmd + [
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, '[', function()
+    move_window_to_left_or_right_monitor('left')
+    hs.alert.show("Move to left monitor", 0.4)
+end)
+
+-- Move window to right monitor: ctrl + option + cmd + ]
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, ']', function()
+    move_window_to_left_or_right_monitor('right')
+    hs.alert.show("Move to right monitor", 0.4)
+end)
+
+
 -- WINDOW CONTROL ENDED
