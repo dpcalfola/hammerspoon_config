@@ -11,10 +11,10 @@
 <hr>
 <br>
 
-## < Version: v0.201 >
+## < Version: v0.202 >
 
 + last update
-    - Code: 2023-01-04
+    - Code: 2023-01-05
     - Manual(README): 2023-01-02
 
 <br>
@@ -43,12 +43,30 @@
 ### Useful shortcuts
 
 * Window hint:
-    * ctrl + opt + cmd + /
+    * shortcut:
+      * ctrl + opt + cmd + /
+    *
+          This feature helps focusing on the window that are hided or minimized or not in the front.
+          When you press the shortcut, every window's hints will be shown
+          If user press the hint key of the window, the window will be focused and located in the front.
+    
+
 * Input source changer:
     * Change next input source: ctrl + space
     * Select Korean: ctrl + opt + cmd + K
     * Select English: ctrl + opt + cmd + J
 
+* Locate mouse cursor to other monitors:
+  * shortcuts:
+    * Move mouse cursor to left monitor: ctrl + opt + cmd + -
+    * Move mouse cursor to right monitor: ctrl + opt + cmd + = 
+    *
+          This feature helps change Mission Control space in the multiple monitor situation by locating the mouse cursor to other monitors without using the mouse. 
+          Changing a space to left or right(ctrl + left/right) works at the monitor where the mouse cursor is located.
+          Using this shortcut, locate the cursor to the monitor you want to change the space,
+          and then use ctrl + left/right to change the space.
+
+     
 <br>
 
 ### Run applications

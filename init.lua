@@ -20,25 +20,107 @@ end)
 
 
 
--- << ABOUT CONTROL MacOS >>
-
+-- << CONTROL MacOS >>
 -- Lock screen and sleep : ctrl + opt + cmd + shift + L
 -- After 5 seconds of lockScreen, the system enters sleep mode
 hs.hotkey.bind({ 'ctrl', 'option', 'cmd', 'shift' }, 'L', function()
     hs.caffeinate.lockScreen()
 end)
--- Show window hints for focusing window by keyboard:
--- ctrl + option + cmd + /(slash)
+-- << CONTROL MacOS ENDED >>
+
+
+
+
+
+-- << WORKSPACE CONTROL >>
+--[[
+🌟 SHOW WINDOW HINTS FOR FOCUSING WINDOW BY KEYBOARD 🌟
+    * Shortcut:
+        ctrl + option + cmd + /(slash)
+
+    * Usage:
+        1. Press the shortcut
+        2. Then press the key of the window you want to focus
+]]--
 hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, '/', hs.hints.windowHints)
 
--- << ABOUT CONTROL MacOS ENDED >>
 
+--[[
+🌟 LOCATE MOUSE CURSOR TO OTHER MONITORS 🌟
+
+    * Shortcuts:
+        Locate mouse cursor
+            to the left monitor: ctrl + opt + cmd + -
+            to the right monitor: ctrl + opt + cmd + +
+
+
+    * Why is this feature useful?
+        1.
+        This feature helps change Mission Control spaces,
+        regardless of which extended monitor
+        it is
+
+        If a user Press 'cmd + left(or right)'
+        there are changes a space on the monitor
+        that MOUSE CURSOR located
+
+        2.
+        Before trying to Mission Control,
+        using this feature,
+        move the mouse cursor to monitor
+        which the user wants to change space.
+
+        Then the user can do it
+        without moving a hand to the mouse
+
+
+    * PS. Mission Control shortcut (MacOS Default):
+        Enter Mission Control: ctrl + up
+        Move left a space: ctrl + left
+        Move right a space: ctrl + right
+        Application windows: ctrl + down
+]]--
+
+-- Start code: Locate mouse cursor to other monitors
+do
+    -- function: Locate mouse cursor to the left or right monitor
+    function locateMouseToMonitor(direction)
+        local currentScreen = hs.mouse.getCurrentScreen()
+        local nextScreen = nil
+
+        if direction == 'right' then
+            nextScreen = currentScreen:toEast()
+        elseif direction == 'left' then
+            nextScreen = currentScreen:toWest()
+        end
+
+        local nextScreenFrame = nextScreen:fullFrame()
+        local currentMousePoint = hs.mouse.getAbsolutePosition()
+
+        local nextMousePoint = hs.geometry.point(
+                nextScreenFrame.x + currentMousePoint.x - currentScreen:fullFrame().x,
+                nextScreenFrame.y + currentMousePoint.y - currentScreen:fullFrame().y
+        )
+        hs.mouse.setAbsolutePosition(nextMousePoint)
+    end
+
+    -- Locate mouse cursor to the left monitor: ctrl + opt + cmd + -
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, '-', function()
+        locateMouseToMonitor('left')
+    end)
+    -- Locate mouse cursor to the right monitor: ctrl + opt + cmd + =
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, '=', function()
+        locateMouseToMonitor('right')
+    end)
+end
+
+-- << WORKSPACE CONTROL ENDED >>
 
 
 
 -- << INPUT LANGUAGE SOURCE CHANGER >>
 
--- INPUT SOURCE CHANGER
+-- 🌟 INPUT SOURCE CHANGER 🌟
 do
     local inputSource = {
         english = "com.apple.keylayout.ABC",
@@ -98,238 +180,240 @@ end)
 
 -- << WINDOW CONTROL (CHANGE SIZE AND MOVE) >>
 
--- HALF SCREEN CONTROL
--- Move window to left: ctrl + option + cmd + left
-local function move_win_to_left()
-    local win = hs.window.focusedWindow() -- 현재 활성화된 앱의 윈도우
-    local frame = win:frame() -- 설정할 프레임
-    local max_size = win:screen():frame() -- 모니터의 스크린 사이즈
 
-    -- .x .y -> x좌표, y좌표
-    -- .w .h -> width, height
+do
+    -- 🌟HALF SCREEN CONTROL🌟
 
-    -- 스크린 사이즈(screen)를 읽어와서 새 프레임(frame)에 할당한다
-    -- 전체 사이즈에서 width 만 1/2 로 설정
-    frame.x = max_size.x
-    frame.y = max_size.y
-    frame.w = max_size.w / 2
-    frame.h = max_size.h
+    -- Move window to left: ctrl + option + cmd + left
+    local function move_win_to_left()
+        local win = hs.window.focusedWindow() -- 현재 활성화된 앱의 윈도우
+        local frame = win:frame() -- 설정할 프레임
+        local max_size = win:screen():frame() -- 모니터의 스크린 사이즈
 
-    -- 설정한 값이 저장된 frame 변수를 윈도우에 반영
-    win:setFrame(frame)
-end
--- Bind Move_window_to_left function to shortcut
--- ctrl + opt + cmd + left
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'left', function()
-    move_win_to_left()
-    hs.alert.show("Move window to left", 0.4)
-end)
+        -- .x .y -> x좌표, y좌표
+        -- .w .h -> width, height
 
--- Move window to right: ctrl + option + cmd + right
-local function move_win_to_right()
-    local win = hs.window.focusedWindow()
-    local frame = win:frame()
-    local max_size = win:screen():frame()
+        -- 스크린 사이즈(screen)를 읽어와서 새 프레임(frame)에 할당한다
+        -- 전체 사이즈에서 width 만 1/2 로 설정
+        frame.x = max_size.x
+        frame.y = max_size.y
+        frame.w = max_size.w / 2
+        frame.h = max_size.h
 
-    -- 왼쪽 이동 상태에서 스크린 사이즈.width의 절반 만큼 x좌표를 오른쪽으로 이동
-    frame.x = max_size.x + (max_size.w / 2)
-    frame.y = max_size.y
-    frame.w = max_size.w / 2
-    frame.h = max_size.h
+        -- 설정한 값이 저장된 frame 변수를 윈도우에 반영
+        win:setFrame(frame)
+    end
+    -- Bind Move_window_to_left function to shortcut
+    -- ctrl + opt + cmd + left
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'left', function()
+        move_win_to_left()
+        hs.alert.show("Move window to left", 0.4)
+    end)
 
-    win:setFrame(frame)
-end
--- Bind
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'right', function()
-    move_win_to_right()
-    hs.alert.show("Move window to right", 0.4)
-end)
+    -- Move window to right: ctrl + option + cmd + right
+    local function move_win_to_right()
+        local win = hs.window.focusedWindow()
+        local frame = win:frame()
+        local max_size = win:screen():frame()
 
+        -- 왼쪽 이동 상태에서 스크린 사이즈.width의 절반 만큼 x좌표를 오른쪽으로 이동
+        frame.x = max_size.x + (max_size.w / 2)
+        frame.y = max_size.y
+        frame.w = max_size.w / 2
+        frame.h = max_size.h
 
--- Move window to top: ctrl + option + cmd + up
-local function move_win_to_top()
-    local win = hs.window.focusedWindow()
-    local frame = win:frame()
-    local max_size = win:screen():frame()
-
-    -- 최대 화면 크기에서 height 를 1/2 로 설정
-    frame.x = max_size.x
-    frame.y = max_size.y
-    frame.w = max_size.w
-    frame.h = max_size.h / 2
-
-    win:setFrame(frame)
-end
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'up', function()
-    move_win_to_top()
-    hs.alert.show("Move window to top", 0.4)
-end)
-
--- Move window to bottom: ctrl + option + cmd + down
-local function move_win_to_bottom()
-    local win = hs.window.focusedWindow()
-    local frame = win:frame()
-    local max_size = win:screen():frame()
-
-    -- top 위치에서 max_size.y 의 1/2 만큼 y좌표를 증가
-    frame.x = max_size.x
-    frame.y = max_size.y + (max_size.h / 2)
-    frame.w = max_size.w
-    frame.h = max_size.h / 2
-
-    win:setFrame(frame)
-end
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'down', function()
-    move_win_to_bottom()
-    hs.alert.show("Move window to bottom", 0.4)
-end)
+        win:setFrame(frame)
+    end
+    -- Bind
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'right', function()
+        move_win_to_right()
+        hs.alert.show("Move window to right", 0.4)
+    end)
 
 
+    -- Move window to top: ctrl + option + cmd + up
+    local function move_win_to_top()
+        local win = hs.window.focusedWindow()
+        local frame = win:frame()
+        local max_size = win:screen():frame()
+
+        -- 최대 화면 크기에서 height 를 1/2 로 설정
+        frame.x = max_size.x
+        frame.y = max_size.y
+        frame.w = max_size.w
+        frame.h = max_size.h / 2
+
+        win:setFrame(frame)
+    end
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'up', function()
+        move_win_to_top()
+        hs.alert.show("Move window to top", 0.4)
+    end)
+
+    -- Move window to bottom: ctrl + option + cmd + down
+    local function move_win_to_bottom()
+        local win = hs.window.focusedWindow()
+        local frame = win:frame()
+        local max_size = win:screen():frame()
+
+        -- top 위치에서 max_size.y 의 1/2 만큼 y좌표를 증가
+        frame.x = max_size.x
+        frame.y = max_size.y + (max_size.h / 2)
+        frame.w = max_size.w
+        frame.h = max_size.h / 2
+
+        win:setFrame(frame)
+    end
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'down', function()
+        move_win_to_bottom()
+        hs.alert.show("Move window to bottom", 0.4)
+    end)
 
 
 
--- QUADRANT SCREEN CONTROL
+
+
+    -- 🌟 QUADRANT SCREEN CONTROL 🌟
     -- Adjust 1/4 height and width
     -- then move to each quadrant
 
--- Move to left top: ctrl + option + cmd + O
-local function move_to_left_top()
-    local win = hs.window.focusedWindow()
-    local frame = win:frame()
-    local max_size = win:screen():frame()
+    -- Move to left top: ctrl + option + cmd + O
+    local function move_to_left_top()
+        local win = hs.window.focusedWindow()
+        local frame = win:frame()
+        local max_size = win:screen():frame()
 
-    frame.x = max_size.x
-    frame.y = max_size.y
-    frame.w = max_size.w / 2
-    frame.h = max_size.h / 2
-    win:setFrame(frame)
-end
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'O', function()
-    move_to_left_top()
-    hs.alert.show("Move to left top", 0.4)
-end)
+        frame.x = max_size.x
+        frame.y = max_size.y
+        frame.w = max_size.w / 2
+        frame.h = max_size.h / 2
+        win:setFrame(frame)
+    end
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'O', function()
+        move_to_left_top()
+        hs.alert.show("Move to left top", 0.4)
+    end)
 
--- Move to right top: ctrl + option + cmd + P
-local function move_to_right_top()
-    local win = hs.window.focusedWindow()
-    local frame = win:frame()
-    local max_size = win:screen():frame()
+    -- Move to right top: ctrl + option + cmd + P
+    local function move_to_right_top()
+        local win = hs.window.focusedWindow()
+        local frame = win:frame()
+        local max_size = win:screen():frame()
 
-    frame.x = max_size.x + (max_size.w / 2)
-    frame.y = max_size.y
-    frame.w = max_size.w / 2
-    frame.h = max_size.h / 2
-    win:setFrame(frame)
-end
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'P', function()
-    move_to_right_top()
-    hs.alert.show("Move to right top", 0.4)
-end)
+        frame.x = max_size.x + (max_size.w / 2)
+        frame.y = max_size.y
+        frame.w = max_size.w / 2
+        frame.h = max_size.h / 2
+        win:setFrame(frame)
+    end
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'P', function()
+        move_to_right_top()
+        hs.alert.show("Move to right top", 0.4)
+    end)
 
--- Move to left bottom: ctrl + option + cmd + L
-local function move_to_left_bottom()
-    local win = hs.window.focusedWindow()
-    local frame = win:frame()
-    local max_size = win:screen():frame()
+    -- Move to left bottom: ctrl + option + cmd + L
+    local function move_to_left_bottom()
+        local win = hs.window.focusedWindow()
+        local frame = win:frame()
+        local max_size = win:screen():frame()
 
-    frame.x = max_size.x
-    frame.y = max_size.y + (max_size.h / 2)
-    frame.w = max_size.w / 2
-    frame.h = max_size.h / 2
-    win:setFrame(frame)
-end
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'L', function()
-    move_to_left_bottom()
-    hs.alert.show("Move to left bottom", 0.4)
-end)
+        frame.x = max_size.x
+        frame.y = max_size.y + (max_size.h / 2)
+        frame.w = max_size.w / 2
+        frame.h = max_size.h / 2
+        win:setFrame(frame)
+    end
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'L', function()
+        move_to_left_bottom()
+        hs.alert.show("Move to left bottom", 0.4)
+    end)
 
--- Move to right bottom: ctrl + option + cmd + ;
-local function move_to_right_bottom()
-    local win = hs.window.focusedWindow()
-    local frame = win:frame()
-    local max_size = win:screen():frame()
+    -- Move to right bottom: ctrl + option + cmd + ;
+    local function move_to_right_bottom()
+        local win = hs.window.focusedWindow()
+        local frame = win:frame()
+        local max_size = win:screen():frame()
 
-    frame.x = max_size.x + (max_size.w / 2)
-    frame.y = max_size.y + (max_size.h / 2)
-    frame.w = max_size.w / 2
-    frame.h = max_size.h / 2
-    win:setFrame(frame)
-end
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, ';', function()
-    move_to_right_bottom()
-    hs.alert.show("Move to right bottom", 0.4)
-end)
+        frame.x = max_size.x + (max_size.w / 2)
+        frame.y = max_size.y + (max_size.h / 2)
+        frame.w = max_size.w / 2
+        frame.h = max_size.h / 2
+        win:setFrame(frame)
+    end
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, ';', function()
+        move_to_right_bottom()
+        hs.alert.show("Move to right bottom", 0.4)
+    end)
 
 
 
--- ETC SCREEN SIZE CONTROL
--- Maximize window:
+    -- 🌟 ETC SCREEN SIZE CONTROL 🌟
+
+    -- Maximize window:
     -- ctrl + option + cmd + 0
     -- or ctrl + option + cmd + pageup
-local function maximize_window()
-    local win = hs.window.focusedWindow()
-    local frame = win:frame()
-    local max_size = win:screen():frame()
+    local function maximize_window()
+        local win = hs.window.focusedWindow()
+        local frame = win:frame()
+        local max_size = win:screen():frame()
 
-    frame.x = max_size.x
-    frame.y = max_size.y
-    frame.w = max_size.w
-    frame.h = max_size.h
+        frame.x = max_size.x
+        frame.y = max_size.y
+        frame.w = max_size.w
+        frame.h = max_size.h
 
-    win:setFrame(frame)
-end
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'pageup', function()
-    maximize_window()
-    hs.alert.show("Maximize window", 0.4)
-end)
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, '0', function()
-    maximize_window()
-    hs.alert.show("Maximize window", 0.4)
-end)
-
--- Adjust 2/3 height size window: ctrl + option + cmd + home
-local function two_thirds_height_size_window()
-    local win = hs.window.focusedWindow()
-    local frame = win:frame()
-    local max_size = win:screen():frame()
-
-    frame.x = max_size.x
-    frame.y = max_size.y + (max_size.h / 3)
-    frame.w = max_size.w
-    frame.h = max_size.h * 2 / 3
-
-    win:setFrame(frame)
-end
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'home', function()
-    two_thirds_height_size_window()
-    hs.alert.show("Two_third_sized window", 0.4)
-end)
-
-
-
--- MOVE WINDOW BETWEEN MONITORS
--- Function: Window move to left or right monitor
-local function move_window_to_left_or_right_monitor(direction)
-    local win = hs.window.focusedWindow()
-    local screen = win:screen()
-    local next_screen = screen:toEast()
-    if direction == 'left' then
-        next_screen = screen:toWest()
+        win:setFrame(frame)
     end
-    win:moveToScreen(next_screen)
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'pageup', function()
+        maximize_window()
+        hs.alert.show("Maximize window", 0.4)
+    end)
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, '0', function()
+        maximize_window()
+        hs.alert.show("Maximize window", 0.4)
+    end)
+
+    -- Adjust 2/3 height size window: ctrl + option + cmd + home
+    local function two_thirds_height_size_window()
+        local win = hs.window.focusedWindow()
+        local frame = win:frame()
+        local max_size = win:screen():frame()
+
+        frame.x = max_size.x
+        frame.y = max_size.y + (max_size.h / 3)
+        frame.w = max_size.w
+        frame.h = max_size.h * 2 / 3
+
+        win:setFrame(frame)
+    end
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'home', function()
+        two_thirds_height_size_window()
+        hs.alert.show("Two_third_sized window", 0.4)
+    end)
+
+
+
+    -- 🌟 MOVE WINDOW BETWEEN MONITORS 🌟
+    -- Function: Window move to left or right monitor
+    local function move_window_to_left_or_right_monitor(direction)
+        local win = hs.window.focusedWindow()
+        local screen = win:screen()
+        local next_screen = screen:toEast()
+        if direction == 'left' then
+            next_screen = screen:toWest()
+        end
+        win:moveToScreen(next_screen)
+    end
+    -- Move window to left monitor: ctrl + option + cmd + [
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, '[', function()
+        move_window_to_left_or_right_monitor('left')
+        hs.alert.show("Move to left monitor", 0.4)
+    end)
+    -- Move window to right monitor: ctrl + option + cmd + ]
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, ']', function()
+        move_window_to_left_or_right_monitor('right')
+        hs.alert.show("Move to right monitor", 0.4)
+    end)
 end
--- Move window to left monitor: ctrl + option + cmd + [
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, '[', function()
-    move_window_to_left_or_right_monitor('left')
-    hs.alert.show("Move to left monitor", 0.4)
-end)
--- Move window to right monitor: ctrl + option + cmd + ]
-hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, ']', function()
-    move_window_to_left_or_right_monitor('right')
-    hs.alert.show("Move to right monitor", 0.4)
-end)
-
-
-
 
 -- << WINDOW CONTROL (CHANGE SIZE AND MOVE) ENDED >>

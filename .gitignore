@@ -39,8 +39,8 @@ luac.out
 *.x86_64
 *.hex
 
-# Spoons
-/Spoons
+# etc
+/chore
 
 # Mac meta data
 .DS_Store
