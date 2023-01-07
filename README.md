@@ -45,10 +45,10 @@
 * Window hint:
     * shortcut:
         * ctrl + opt + cmd + /
-    *
-    This feature helps focusing on the window that are hided or minimized or not in the front.
-    When you press the shortcut, every window's hints will be shown
-    If user press the hint key of the window, the window will be focused and located in the front.
+    * Note:
+        - This feature helps that focusing on the window minimized or hided or not in the front.
+        - When you press the shortcut, every window's hints as 'hint key' will be shown.
+        - If you press the hint key of the window, the window will be focused and located in the front.
 
 
 * Input source changer:
@@ -108,7 +108,7 @@
 <br>
 <br>
 
-## < 사용 방법 >
+## < 해머스푼 사용 방법 >
 
 ### Hammerspoon 설치
 
@@ -155,9 +155,3 @@
 
 * '기계인간' 님의 Hammerspoon 블로그를 참고 하였습니다.
     * https://johngrib.github.io/wiki/hammerspoon/
-
-
-- This is the first line of the first list item.
-  This is the second line of the first list item.
-- This is the first line of the second list item.  
-  This is the second line of the second list item.
