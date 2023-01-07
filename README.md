@@ -1,5 +1,9 @@
 # Fola's Hammerspoon config code
 
+<br>
+<br>
+<br>
+
 ## < Document list >
 
 1. About version
@@ -8,7 +12,7 @@
 4. Reference
 
 <br>
-<hr>
+<br>
 <br>
 
 ## < Version: v0.202 >
