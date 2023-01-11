@@ -15,11 +15,11 @@
 <br>
 <br>
 
-## < Version: v0.202 >
+## < Version: v0.203 >
 
 + last update
-    - Code: 2023-01-05
-    - Manual(README): 2023-01-02
+    - Code: 2023-01-11
+    - Manual(README): 2023-01-11
 
 <br>
 <br>
@@ -75,6 +75,7 @@
 
 ### Run applications
 
+* System Preferences: ctrl + opt + cmd + S
 * Note: ctrl + opt + cmd + N
 * Google chrome: ctrl + opt + cmd + C
 
