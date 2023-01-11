@@ -171,6 +171,11 @@ hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'C', function()
     hs.application.launchOrFocus('Google Chrome')
     hs.alert.show("Google Chrome")
 end)
+-- System Setting: ctrl + opt + cmd + S
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'S', function()
+    hs.application.launchOrFocus('System Preferences')
+    hs.alert.show("System Preferences")
+end)
 -- << RUN APPLICATIONS ENDED>>
 
 
