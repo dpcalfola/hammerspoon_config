@@ -143,7 +143,7 @@ do
     end
     hs.hotkey.bind({ 'ctrl' }, 'space', changeInput)
 
-    -- Select input source directly
+    -- Select input source directly (1)
     -- Korean : ctrl + option + cmd + K
     hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'K', function()
         hs.keycodes.currentSourceID(inputSource.korean)
@@ -151,6 +151,25 @@ do
     end)
     -- English : ctrl + option + cmd + J
     hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'J', function()
+        hs.keycodes.currentSourceID(inputSource.english)
+        hs.alert.show("English", 0.4)
+    end)
+
+
+    --[[
+        * More comfortable way to select input source directly
+            Left ctrl -> Left pinky finger
+            Right shift -> Right pinky finger
+            K or J (Korean or English) -> Right index finger
+    ]]--
+    -- Select input source directly (2)
+    -- Korean : ctrl + shift + K
+    hs.hotkey.bind({ 'ctrl', 'shift' }, 'K', function()
+        hs.keycodes.currentSourceID(inputSource.korean)
+        hs.alert.show("한국어", 0.4)
+    end)
+    -- English : ctrl + shift + J
+    hs.hotkey.bind({ 'ctrl', 'shift' }, 'J', function()
         hs.keycodes.currentSourceID(inputSource.english)
         hs.alert.show("English", 0.4)
     end)
