@@ -15,11 +15,11 @@
 <br>
 <br>
 
-## < Version: v0.203 >
+## < Version: v0.204>
 
 + last update
-    - Code: 2023-01-11
-    - Manual(README): 2023-01-11
+    - Code: 2023-01-25
+    - Manual(README): 2023-01-25
 
 <br>
 <br>
@@ -56,9 +56,19 @@
 
 
 * Input source changer:
-    * Change next input source: ctrl + space
-    * Select Korean: ctrl + opt + cmd + K
-    * Select English: ctrl + opt + cmd + J
+    * Toggle input source:
+      * ctrl + space
+    * Select language directly 1:
+      * ctrl + opt + cmd + K (Korean)
+      * ctrl + opt + cmd + J (English)
+    * Select language directly 2 (comfortable)
+      * ctrl + shift + K (Korean)
+      * ctrl + shift + J (English)
+>* Note - It is so comfortable to use this way:
+>   * Left ctrl -> Left pinky finger
+>   * Right shift -> Right pinky finger
+>   * K or J (Korean or English) -> Right index finger
+
 
 * Locate mouse cursor to other monitors:
     * shortcuts:
