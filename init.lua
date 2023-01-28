@@ -441,3 +441,25 @@ do
 end
 
 -- << WINDOW CONTROL (CHANGE SIZE AND MOVE) ENDED >>
+
+
+-- << TIME CHECKER >> --
+local function time_checker()
+    hs.alert.show("Current time - " .. os.date("%X"), 4)
+    hs.sound.getByName("Funk"):play()
+end
+
+local alarm_timer = hs.timer.doWhile(
+    function()
+        print('Console log: alarm_timer runs at' .. os.date("%X"))
+        return os.date("%M") == "53"
+    end,
+    time_checker,
+    60
+)
+alarm_timer:start()
+
+-- Execute time_checker function with shortcut: ctrl + option + cmd + T
+hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'T', function()
+    time_checker()
+end)
