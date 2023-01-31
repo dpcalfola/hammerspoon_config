@@ -445,21 +445,24 @@ end
 
 -- << TIME CHECKER >> --
 local function time_checker()
-    hs.alert.show("Current time - " .. os.date("%X"), 4)
+    local current_time_message = "Current time - " .. os.date("%X")
+
+    hs.alert.show(current_time_message, 4)
     hs.sound.getByName("Funk"):play()
+
+    -- print message on Hammerspoon console to check up this function
+    print(current_time_message)
 end
 
-local alarm_timer = hs.timer.doWhile(
-    function()
-        print('Console log: alarm_timer runs at' .. os.date("%X"))
-        return os.date("%M") == "53"
-    end,
-    time_checker,
-    60
-)
-alarm_timer:start()
+-- Execute time_checker every hours (Every HH:00)
+do
+    for i = 0, 23 do
+        hs.timer.doAt(string.format("%02d:00", i), time_checker)
+    end
+end
 
--- Execute time_checker function with shortcut: ctrl + option + cmd + T
+-- Shortcut : ctrl + option + cmd + T
+-- Execute time_checker function with shortcut
 hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'T', function()
     time_checker()
 end)
