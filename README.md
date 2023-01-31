@@ -15,14 +15,25 @@
 <br>
 <br>
 
-## < Version: v0.204>
+## < Version: v0.205>
 
 + last update
-    - Code: 2023-01-25
-    - Manual(README): 2023-01-25
+    - Code: 2023-01-31
+    - Manual(README): 2023-01-31
 
 <br>
 <br>
+
+
+## < Feature >
+
+* Useful shortcuts - Described in the next section(Shortcuts list)
+
+* Time-checker
+  * Notice the every o'clock time with sound
+  * Check the current time with shortcut: ctrl + opt + cmd + T
+
+    
 
 ## < Shortcuts list >
 
@@ -114,6 +125,12 @@
 * Move the focused window between monitors
     * Move to left monitor: ctrl + opt + cmd + [
     * Move to right monitor: ctrl + opt + cmd + ]
+
+<br>
+
+### Time checker
+* Show the current time on the screen: ctrl + opt + cmd + T
+
 
 <br>
 
