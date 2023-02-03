@@ -454,12 +454,31 @@ local function time_checker()
     print(current_time_message)
 end
 
--- Execute time_checker every hours (Every HH:00)
+
+--[[
+** Acknowledged problems of the Time-checker
+
+Issue 1:
+    "%02d:00" is not working but "%02d:01" is working
+    I think doAT() misses the time point of %02d:00:00
+    So I solve to set time as %02d:00:30 temporarily
+
+Issue 2:
+    Not confirmed this code works well after 24:00:00
+
+    And it seems to need "config reload" to work well
+    when awake from sleep mode and 24:00:00 is passed
+]]--
+
+-- Execute time_checker every hours (Every HH:00:30)
 do
     for i = 0, 23 do
-        hs.timer.doAt(string.format("%02d:00", i), time_checker)
+        hs.timer.doAt(string.format("%02d:00:30", i), time_checker)
     end
 end
+
+
+
 
 -- Shortcut : ctrl + option + cmd + T
 -- Execute time_checker function with shortcut
