@@ -416,7 +416,6 @@ do
     end)
 
 
-
     -- 🌟 MOVE WINDOW BETWEEN MONITORS 🌟
     -- Function: Window move to left or right monitor
     local function move_window_to_left_or_right_monitor(direction)
@@ -431,13 +430,34 @@ do
     -- Move window to left monitor: ctrl + option + cmd + [
     hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, '[', function()
         move_window_to_left_or_right_monitor('left')
-        hs.alert.show("Move to left monitor", 0.4)
+        hs.alert.show("Move to left monitor", 1)
     end)
     -- Move window to right monitor: ctrl + option + cmd + ]
     hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, ']', function()
         move_window_to_left_or_right_monitor('right')
-        hs.alert.show("Move to right monitor", 0.4)
+        hs.alert.show("Move to right monitor", 1)
     end)
 end
-
 -- << WINDOW CONTROL (CHANGE SIZE AND MOVE) ENDED >>
+
+
+
+-- << TIME CHECKER START >> --
+do
+    local function showCurrentTime()
+        local current_time_message = "Current time - " .. os.date("%X")
+
+        hs.alert.show(current_time_message, 4)
+        hs.sound.getByName("Funk"):play()
+
+        -- print message on Hammerspoon console to check up this function
+        print(current_time_message)
+    end
+
+    -- Shortcut : ctrl + option + cmd + T
+    -- Execute time_checker function with shortcut
+    hs.hotkey.bind({ 'ctrl', 'option', 'cmd' }, 'T', function()
+        showCurrentTime()
+    end)
+end
+-- << TIME CHECKER END >> --

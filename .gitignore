@@ -47,3 +47,6 @@ luac.out
 
 # .idea
 .idea
+
+# Personal use directory
+/personal_use
