@@ -8,32 +8,21 @@
 
 1. About version
 2. Shortcuts list
-3. How to use Hammerspoon and implement Fola's config
-4. Reference
+3. How to use Hammerspoon and Import Fola's config
 
 <br>
 <br>
 <br>
 
-## < Version: v0.205>
+## < Version: v0.206a>
 
 + last update
-    - Code: 2023-01-31
-    - Manual(README): 2023-01-31
+    - Code: 2023-02-17
+    - Manual(README): 2023-02-17
 
 <br>
 <br>
 
-
-## < Feature >
-
-* Useful shortcuts - Described in the next section(Shortcuts list)
-
-* Time-checker
-  * Notice the every o'clock time with sound
-  * Check the current time with shortcut: ctrl + opt + cmd + T
-
-    
 
 ## < Shortcuts list >
 
@@ -182,8 +171,3 @@
 
 <hr/>
 <br>
-
-### Reference
-
-* '기계인간' 님의 Hammerspoon 블로그를 참고 하였습니다.
-    * https://johngrib.github.io/wiki/hammerspoon/
