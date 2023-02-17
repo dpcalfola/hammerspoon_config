@@ -14,11 +14,11 @@
 <br>
 <br>
 
-## < Version: v0.206a>
+## < Version: v0.206b>
 
 + last update
-    - Code: 2023-02-17
-    - Manual(README): 2023-02-17
+    - Code: 2023-02-18
+    - Manual(README): 2023-02-18
 
 <br>
 <br>
@@ -63,11 +63,11 @@
       * ctrl + opt + cmd + J (English)
     * Select language directly 2 (comfortable)
       * ctrl + shift + K (Korean)
-      * ctrl + shift + J (English)
+      * ctrl + shift + J or L(English)
 >* Note - It is so comfortable to use this way:
 >   * Left ctrl -> Left pinky finger
 >   * Right shift -> Right pinky finger
->   * K or J (Korean or English) -> Right index finger
+>   * K(korean) / J or L (English) -> Right index finger
 
 
 * Locate mouse cursor to other monitors:
