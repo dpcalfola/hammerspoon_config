@@ -1,6 +1,10 @@
 # Fola's Hammerspoon config code
 
 <br>
+
+관련 블로그 포스트 링크<br>
+https://dpcalfola.tistory.com/entry/Hammerspoon-lua-hammerspoon-v0-206b
+
 <br>
 <br>
 
