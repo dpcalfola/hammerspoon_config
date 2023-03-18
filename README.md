@@ -125,6 +125,7 @@ https://dpcalfola.tistory.com/entry/Hammerspoon-lua-hammerspoon-v0-206b
 ### Time checker
 * Show the current time on the screen: ctrl + opt + cmd + T
 
+<br>
 
 ### Google Chrome control without focusing
 * Tab control
