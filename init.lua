@@ -208,8 +208,6 @@ end)
 
 
 -- << WINDOW CONTROL (CHANGE SIZE AND MOVE) >>
-
-
 do
     -- 🌟HALF SCREEN CONTROL🌟
 
@@ -466,3 +464,108 @@ do
     end)
 end
 -- << TIME CHECKER END >> --
+
+
+
+
+
+-- << CHROME MEDIA CONTROL START >> --
+do
+    -- Function to focus Chrome
+    function focusChrome()
+        --[[
+            How to get the bundle ID of chrome app for hs.application.get() parameter?
+                In terminal, run the following command:
+                    osascript -e 'id of app "Google Chrome"'
+                My result is: com.google.Chrome
+        ]]--
+        local chrome = hs.application.get("com.google.Chrome")
+        if chrome == nil then
+            return false
+        end
+
+        chrome:activate()
+        return true
+    end
+
+    -- Variable to store the bundle ID of the previously focused application
+    local previousAppID = nil
+
+    -- Function to focus the previously focused application
+    function focusPrevious()
+        if previousAppID == nil then
+            -- No previous app to focus
+            return
+        end
+        -- Launch or focus the previous app by its bundle ID
+        hs.application.launchOrFocusByBundleID(previousAppID)
+    end
+
+    -- Function to update the previous application variable
+    function updatePrevious()
+        local lastApp = hs.application.frontmostApplication()
+        if lastApp ~= nil then
+            previousAppID = lastApp:bundleID()
+        end
+    end
+
+    -- Bind updatePrevious to Hammerspoon's application watcher
+    hs.application.watcher.new(updatePrevious):start()
+
+
+    -- Function to simulate key press
+    function simulateKeyPress(keys, modifiers)
+        -- If modifiers is not provided, set it to empty table
+        if modifiers == nil then
+            modifiers = {}
+        end
+        -- CAUSATION --
+        -- modifiers should be a table
+        -- keys should be a table
+        hs.eventtap.keyStroke(modifiers, table.unpack(keys))
+    end
+
+    -- Function to control Chrome by simulating key press
+    function controlChrome(keys, modifiers)
+
+        -- Focus Chrome
+        focusChrome()
+        -- Simulate key press to control
+        simulateKeyPress(keys, modifiers)
+        -- Focus the previously focused application
+        focusPrevious()
+    end
+
+
+
+    -- Keybindings for controlChrome function
+
+    -- CAUSATION --
+    -- --> argument keys should be a table
+    -- --> argument modifiers should be a table or nil
+
+    -- Tab control: Move to the left tab
+    hs.hotkey.bind({ 'ctrl', 'option' }, '[', function()
+        controlChrome({ "left" }, { 'option', 'cmd' })
+    end)
+    -- Tab control: Move to the right tab
+    hs.hotkey.bind({ 'ctrl', 'option' }, ']', function()
+        controlChrome({ "right" }, { 'option', 'cmd' })
+    end)
+    -- Media: Play/Pause
+    hs.hotkey.bind({ 'ctrl', 'option' }, 'J', function()
+        controlChrome({ "space" })
+    end)
+    hs.hotkey.bind({ 'ctrl', 'option' }, 'K', function()
+        controlChrome({ "space" })
+    end)
+    -- Media: Backward
+    hs.hotkey.bind({ 'ctrl', 'option' }, 'H', function()
+        controlChrome({ "left" })
+    end)
+    -- Media: Forward
+    hs.hotkey.bind({ 'ctrl', 'option' }, 'L', function()
+        controlChrome({ "right" })
+    end)
+end
+-- << CHROME MEDIA CONTROL END >> --
