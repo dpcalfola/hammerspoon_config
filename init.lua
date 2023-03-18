@@ -509,36 +509,58 @@ do
 
 
     -- Function to simulate key press
-    function simulateKeyPress(keys)
-        hs.eventtap.keyStroke({}, table.unpack({keys}))
+    function simulateKeyPress(keys, modifiers)
+        -- If modifiers is not provided, set it to empty table
+        if modifiers == nil then
+            modifiers = {}
+        end
+        -- CAUSATION --
+        -- modifiers should be a table
+        -- keys should be a table
+        hs.eventtap.keyStroke(modifiers, table.unpack(keys))
     end
 
     -- Function to control Chrome by simulating key press
-    function controlChrome(keys)
+    function controlChrome(keys, modifiers)
+
         -- Focus Chrome
         focusChrome()
         -- Simulate key press to control
-        simulateKeyPress(keys)
+        simulateKeyPress(keys, modifiers)
         -- Focus the previously focused application
         focusPrevious()
     end
 
 
-    -- Keybindings for functions
-    -- Play/Pause
+
+    -- Keybindings for controlChrome function
+
+    -- CAUSATION --
+    -- --> argument keys should be a table
+    -- --> argument modifiers should be a table or nil
+
+    -- Tab control: Move to the left tab
+    hs.hotkey.bind({ 'ctrl', 'option' }, '[', function()
+        controlChrome({ "left" }, { 'option', 'cmd' })
+    end)
+    -- Tab control: Move to the right tab
+    hs.hotkey.bind({ 'ctrl', 'option' }, ']', function()
+        controlChrome({ "right" }, { 'option', 'cmd' })
+    end)
+    -- Media: Play/Pause
     hs.hotkey.bind({ 'ctrl', 'option' }, 'J', function()
-        controlChrome("space")
+        controlChrome({ "space" })
     end)
     hs.hotkey.bind({ 'ctrl', 'option' }, 'K', function()
-        controlChrome("space")
+        controlChrome({ "space" })
     end)
-    -- Backward
+    -- Media: Backward
     hs.hotkey.bind({ 'ctrl', 'option' }, 'H', function()
-        controlChrome("left")
+        controlChrome({ "left" })
     end)
-    -- Forward
+    -- Media: Forward
     hs.hotkey.bind({ 'ctrl', 'option' }, 'L', function()
-        controlChrome("right")
+        controlChrome({ "right" })
     end)
 end
 -- << CHROME MEDIA CONTROL END >> --
