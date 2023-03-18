@@ -14,11 +14,11 @@
 <br>
 <br>
 
-## < Version: v0.206a>
+## < Version: v0.21>
 
 + last update
-    - Code: 2023-02-17
-    - Manual(README): 2023-02-17
+    - Code: 2023-03-19
+    - Manual(README): 2023-03-19
 
 <br>
 <br>
@@ -119,6 +119,33 @@
 
 ### Time checker
 * Show the current time on the screen: ctrl + opt + cmd + T
+
+
+### Google Chrome control without focusing
+* Tab control
+  * Move to left tab: ctrl + opt + [
+  * Move to right tab: ctrl + opt + ]
+* Media control
+  * Play/Pause: ctrl + opt + J or K
+  * Backward: ctrl + opt + H
+  * Forward: ctrl + opt + L
+> With these shortcuts,<br>
+> Control media playing in Chrome<br> 
+> while maintaining the activated window such as IDE
+
+> How it works ? -> When shortcut key is pressed, the following steps are executed:
+> 1. Activate Chrome window
+> 2. Simulate the key press event
+>    - Ctrl + Option + {key}
+>      - H: Left arrow
+>      - L: Right arrow
+>      - J or K: Space bar
+>      - [ or ]: cmd + opt + left or right arrow (Chrome default shortcut to move tab)
+> 3. Activate the previous window
+> <br>
+> 
+> Since this feature simulates the key press event,<br>
+> the tap that need to control media should be activated in Chrome
 
 
 <br>
