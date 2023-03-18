@@ -1,6 +1,10 @@
 # Fola's Hammerspoon config code
 
 <br>
+
+관련 블로그 포스트 링크<br>
+https://dpcalfola.tistory.com/entry/Hammerspoon-lua-hammerspoon-v0-206b
+
 <br>
 <br>
 
@@ -14,12 +18,13 @@
 <br>
 <br>
 
+
 ## < Version: v0.21>
 
 + last update
     - Code: 2023-03-19
     - Manual(README): 2023-03-19
-
+    
 <br>
 <br>
 
@@ -63,11 +68,11 @@
       * ctrl + opt + cmd + J (English)
     * Select language directly 2 (comfortable)
       * ctrl + shift + K (Korean)
-      * ctrl + shift + J (English)
+      * ctrl + shift + J or L(English)
 >* Note - It is so comfortable to use this way:
 >   * Left ctrl -> Left pinky finger
 >   * Right shift -> Right pinky finger
->   * K or J (Korean or English) -> Right index finger
+>   * K(korean) / J or L (English) -> Right index finger
 
 
 * Locate mouse cursor to other monitors:

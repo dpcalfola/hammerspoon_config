@@ -160,7 +160,7 @@ do
         * More comfortable way to select input source directly
             Left ctrl -> Left pinky finger
             Right shift -> Right pinky finger
-            K or J (Korean or English) -> Right index finger
+            K(korean) / J or L (English) -> Right index finger
     ]]--
     -- Select input source directly (2)
     -- Korean : ctrl + shift + K
@@ -170,6 +170,11 @@ do
     end)
     -- English : ctrl + shift + J
     hs.hotkey.bind({ 'ctrl', 'shift' }, 'J', function()
+        hs.keycodes.currentSourceID(inputSource.english)
+        hs.alert.show("English", 0.4)
+    end)
+    -- English : ctrl + shift + L
+    hs.hotkey.bind({ 'ctrl', 'shift' }, 'L', function()
         hs.keycodes.currentSourceID(inputSource.english)
         hs.alert.show("English", 0.4)
     end)
