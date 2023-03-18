@@ -203,8 +203,6 @@ end)
 
 
 -- << WINDOW CONTROL (CHANGE SIZE AND MOVE) >>
-
-
 do
     -- 🌟HALF SCREEN CONTROL🌟
 
@@ -461,3 +459,104 @@ do
     end)
 end
 -- << TIME CHECKER END >> --
+
+
+
+
+
+-- << CHROME MEDIA CONTROL START >> --
+do
+    -- Function to focus Chrome
+    function focusChrome()
+        --[[
+            How to get the bundle ID of chrome app for hs.application.get() parameter?
+                In terminal, run the following command:
+                    osascript -e 'id of app "Google Chrome"'
+                My result is: com.google.Chrome
+        ]]--
+        local chrome = hs.application.get("com.google.Chrome")
+        if chrome == nil then
+            return false
+        end
+
+        chrome:activate()
+        return true
+    end
+
+    -- Variable to store the bundle ID of the previously focused application
+    local previousAppID = nil
+
+    -- Function to focus the previously focused application
+    function focusPrevious()
+        if previousAppID == nil then
+            -- No previous app to focus
+            return
+        end
+        -- Launch or focus the previous app by its bundle ID
+        hs.application.launchOrFocusByBundleID(previousAppID)
+    end
+
+    -- Function to update the previous application variable
+    function updatePrevious()
+        local lastApp = hs.application.frontmostApplication()
+        if lastApp ~= nil then
+            previousAppID = lastApp:bundleID()
+        end
+    end
+
+    -- Bind updatePrevious to Hammerspoon's application watcher
+    hs.application.watcher.new(updatePrevious):start()
+
+
+    -- Function to simulate key press
+    function simulateKeyPress(key)
+        hs.eventtap.keyStroke({}, key)
+    end
+
+
+    -- Function to play or pause Chrome video
+    function playPauseChrome()
+        -- Focus Chrome
+        focusChrome()
+        -- Simulate space bar key press to play/pause video
+        simulateKeyPress("space")
+        -- Focus the previously focused application
+        focusPrevious()
+    end
+
+    -- Function to seek backward in Chrome video
+    function backwardChrome()
+        -- Focus Chrome
+        focusChrome()
+        -- Simulate left arrow key press to seek backward
+        simulateKeyPress("left")
+        -- Focus the previously focused application
+        focusPrevious()
+    end
+
+    -- Function to seek forward in Chrome video
+    function forwardChrome()
+        -- Focus Chrome
+        focusChrome()
+        -- Simulate right arrow key press to seek forward
+        simulateKeyPress("right")
+        -- Focus the previously focused application
+        focusPrevious()
+    end
+
+
+    -- Keybindings for functions
+    hs.hotkey.bind({ 'ctrl', 'option' }, 'J', function()
+        playPauseChrome()
+    end)
+    hs.hotkey.bind({ 'ctrl', 'option' }, 'K', function()
+        playPauseChrome()
+    end)
+    hs.hotkey.bind({ 'ctrl', 'option' }, 'H', function()
+        backwardChrome()
+    end)
+    hs.hotkey.bind({ 'ctrl', 'option' }, 'L', function()
+        forwardChrome()
+    end)
+end
+-- << CHROME MEDIA CONTROL END >> --
