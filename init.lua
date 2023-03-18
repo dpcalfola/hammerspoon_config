@@ -509,54 +509,36 @@ do
 
 
     -- Function to simulate key press
-    function simulateKeyPress(key)
-        hs.eventtap.keyStroke({}, key)
+    function simulateKeyPress(keys)
+        hs.eventtap.keyStroke({}, table.unpack({keys}))
     end
 
-
-    -- Function to play or pause Chrome video
-    function playPauseChrome()
+    -- Function to control Chrome by simulating key press
+    function controlChrome(keys)
         -- Focus Chrome
         focusChrome()
-        -- Simulate space bar key press to play/pause video
-        simulateKeyPress("space")
-        -- Focus the previously focused application
-        focusPrevious()
-    end
-
-    -- Function to seek backward in Chrome video
-    function backwardChrome()
-        -- Focus Chrome
-        focusChrome()
-        -- Simulate left arrow key press to seek backward
-        simulateKeyPress("left")
-        -- Focus the previously focused application
-        focusPrevious()
-    end
-
-    -- Function to seek forward in Chrome video
-    function forwardChrome()
-        -- Focus Chrome
-        focusChrome()
-        -- Simulate right arrow key press to seek forward
-        simulateKeyPress("right")
+        -- Simulate key press to control
+        simulateKeyPress(keys)
         -- Focus the previously focused application
         focusPrevious()
     end
 
 
     -- Keybindings for functions
+    -- Play/Pause
     hs.hotkey.bind({ 'ctrl', 'option' }, 'J', function()
-        playPauseChrome()
+        controlChrome("space")
     end)
     hs.hotkey.bind({ 'ctrl', 'option' }, 'K', function()
-        playPauseChrome()
+        controlChrome("space")
     end)
+    -- Backward
     hs.hotkey.bind({ 'ctrl', 'option' }, 'H', function()
-        backwardChrome()
+        controlChrome("left")
     end)
+    -- Forward
     hs.hotkey.bind({ 'ctrl', 'option' }, 'L', function()
-        forwardChrome()
+        controlChrome("right")
     end)
 end
 -- << CHROME MEDIA CONTROL END >> --
