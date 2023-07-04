@@ -141,7 +141,12 @@ do
         end
         hs.keycodes.currentSourceID(nextInput)
     end
+
+    -- Change inputSource(1): Ctrl + space
     hs.hotkey.bind({ 'ctrl' }, 'space', changeInput)
+
+    -- Change inputSource(2): F20
+    hs.hotkey.bind({}, 'F20', changeInput)
 
     -- Select input source directly (1)
     -- Korean : ctrl + option + cmd + K
